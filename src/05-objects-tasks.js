@@ -112,39 +112,41 @@ function fromJSON(proto, json) {
  *
  *  For more examples see unit tests.
  */
+class Builder {
+}
 
-// const cssSelectorBuilder = {
-//   element(value) {
-//     return new Builder().element(value);
-//   },
+const cssSelectorBuilder = {
+  element(value) {
+    return new Builder().element(value);
+  },
 
-//   id(value) {
-//     return new Builder().id(value);
-//   },
+  id(value) {
+    return new Builder().id(value);
+  },
 
-//   class(value) {
-//     return new Builder().class(value);
-//   },
+  class(value) {
+    return new Builder().class(value);
+  },
 
-//   attr(/* value */) {
-//     throw new Error('Not implemented');
-//   },
+  attr(/* value */) {
+    throw new Error('Not implemented');
+  },
 
-//   pseudoClass(/* value */) {
-//     throw new Error('Not implemented');
-//   },
+  pseudoClass(/* value */) {
+    throw new Error('Not implemented');
+  },
 
-//   pseudoElement(/* value */) {
-//     throw new Error('Not implemented');
-//   },
+  pseudoElement(/* value */) {
+    throw new Error('Not implemented');
+  },
 
-//   combine(/* selector1, combinator, selector2 */) {
-//     throw new Error('Not implemented');
-//   },
-//   stringify() {
-//     return String(this);
-//   },
-// };
+  combine(/* selector1, combinator, selector2 */) {
+    throw new Error('Not implemented');
+  },
+  stringify() {
+    return String(this);
+  },
+};
 
 
 module.exports = {

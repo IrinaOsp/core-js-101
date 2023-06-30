@@ -127,8 +127,21 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  const t1 = rect1.top;
+  const t2 = rect1.top + rect1.height;
+  const l1 = rect1.left;
+  const l2 = rect1.left + rect1.width;
+
+  const T1 = rect2.top;
+  const T2 = rect2.top + rect2.height;
+  const L1 = rect2.left;
+  const L2 = rect2.left + rect2.width;
+
+  if (l1 < L2 && l2 > L1 && t1 < T2 && t2 > T1) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -390,8 +403,14 @@ function isBracketsBalanced(str) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  const result = [];
+  let number = num;
+  do {
+    result.push(number % n);
+    number = Math.floor(number / n);
+  } while (number >= 1);
+  return result.reverse().join('');
 }
 
 
@@ -407,8 +426,14 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let res = [];
+  const splitedArr = pathes.map((path) => path.split('/'));
+  splitedArr.forEach((el, ind) => {
+    if (ind >= splitedArr.length - 1) { return; }
+    res = el.filter((word) => splitedArr[ind + 1].indexOf(word) !== -1);
+  });
+  return res.length > 0 ? `${res.join('/')}/` : '';
 }
 
 
@@ -430,8 +455,22 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const rows1 = m1.length;
+  const cols1 = m1[0].length;
+  const cols2 = m2[0].length;
+  const res = [];
+  for (let i = 0; i < rows1; i += 1) {
+    res[i] = [];
+    for (let j = 0; j < cols2; j += 1) {
+      let sum = 0;
+      for (let k = 0; k < cols1; k += 1) {
+        sum += m1[i][k] * m2[k][j];
+      }
+      res[i][j] = sum;
+    }
+  }
+  return res;
 }
 
 
@@ -465,8 +504,29 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  const rows = position.length;
+  const cols = position[0].length;
+
+  for (let i = 0; i < cols; i += 1) {
+    if (position[0][i] && position[0][i] === position[1][i] && position[0][i] === position[2][i]) {
+      return position[0][i];
+    }
+  }
+  for (let i = 0; i < rows; i += 1) {
+    if (position[i][0] && position[i][0] === position[i][1] && position[i][0] === position[i][2]) {
+      return position[i][0];
+    }
+  }
+
+  if (position[0][0] && position[0][0] === position[1][1] && position[0][0] === position[2][2]) {
+    return position[0][0];
+  }
+  if (position[0][2] && position[0][2] === position[1][1] && position[0][2] === position[2][0]) {
+    return position[0][2];
+  }
+
+  return undefined;
 }
 
 
